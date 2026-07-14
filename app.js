@@ -687,6 +687,13 @@ const AUTHOR_BIO_FACTS = {
 };
 
 const DETAILED_EPISODES = {
+  'Комедия ошибок':[
+    {loc:'гуманистическая основа комедии',text:'Шекспир показывает человека существом, способным выйти из заблуждения и восстановить отношения. Даже ревность, страх и социальная путаница не приводят к трагической развязке: узнавание возвращает героям семью, имя и место в мире.'},
+    {loc:'две пары близнецов',text:'Антифол Эфесский и Антифол Сиракузский, а также два Дромио внешне неразличимы. Поэтому один получает поручения, деньги, упрёки и приглашения, предназначенные другому, а зритель видит причину ошибок раньше персонажей.'},
+    {loc:'цепь сцен одного дня',text:'Действие развивается почти без пауз: ошибочная встреча вызывает следующую, затем появляются новые обвинения, долги, ревность и попытка объявить героя безумным. Каждая сцена усиливает предыдущую путаницу и ускоряет темп комедии.'},
+    {loc:'финальная сцена узнавания',text:'В монастыре раскрывается происхождение обеих пар близнецов, Эгеон узнаёт сыновей, а Эмилия — мужа и детей. Развязка не просто прекращает ошибки, а восстанавливает разрушенную семью и общественный порядок.'},
+    {loc:'конкретный комический эпизод',text:'Адриана принимает Антифола Сиракузского за мужа и ведёт его домой, тогда как настоящий Антифол Эфесский остаётся у запертой двери. Комизм возникает из разрыва между полной уверенностью персонажей и знанием зрителя.'}
+  ],
   'Песнь о Роланде':[{'loc':'тирада 87–89','text':'Оливье трижды просит Роланда затрубить в Олифант. Роланд отказывается, потому что боится бесчестия. Повтор подчёркивает его героическую гордость. Когда он всё-таки трубит, помощь уже запаздывает.'},{'loc':'финальные тирады о смерти Роланда','text':'Роланд ложится лицом к Испании, поднимает перчатку к Богу и вспоминает завоевания. Воинская поза соединяется с исповедальным жестом. Так эпос связывает вассальную честь и христианское спасение.'}],
   'Божественная комедия. Ад':[{'loc':'Ад, песнь III','text':'Над вратами Ада написано, что входящие должны оставить надежду. Затем Данте видит безразличных, которые при жизни не выбрали ни добра, ни зла. Их бесконечный бег показывает наказание за нравственную пассивность.'},{'loc':'Ад, песнь V','text':'Франческа рассказывает о чтении истории Ланселота. Книга становится посредником соблазна. Данте сочувствует героине, но композиция помещает её рассказ внутри круга сладострастных.'}],
   'Декамерон':[{'loc':'День I, новелла 1','text':'Сер Чаппеллетто на смертном одре произносит ложную исповедь. Священник принимает его за святого, а люди начинают поклоняться мошеннику. Новелла показывает разрыв между фактом, речью и общественной репутацией.'},{'loc':'рамка, Введение','text':'Семь женщин и трое мужчин покидают охваченную чумой Флоренцию. Они создают временное общество с правилами рассказа. Рамка противопоставляет хаосу города порядок слова и человеческого общения.'}],
@@ -1477,6 +1484,13 @@ const PLAN_EVIDENCE_V13 = {
     {loc:'эпизод с Олифантом',text:'Роланд долго отказывается трубить в рог, потому что считает просьбу о помощи бесчестием. Его мужество переходит в гордыню, а слишком поздний сигнал приводит к гибели арьергарда.'},
     {loc:'спор Роланда и Оливье',text:'Оливье воплощает разумную доблесть и предлагает вовремя позвать Карла; Роланд защищает абсолютный героизм. Их спор показывает, что подлинное мужество нуждается в ответственности за товарищей.'},
     {loc:'поэтика поэмы',text:'Гиперболы увеличивают силу героев и масштаб битвы, повторы замедляют кульминационные сцены, а параллельные эпизоды придают повествованию торжественный, почти ритуальный характер.'}
+  ],
+  9: [
+    {loc:'гуманистическая основа комедии',text:'Шекспир сохраняет веру в жизненную энергию человека: заблуждения и конфликты оказываются преодолимыми, а финальное узнавание возвращает героям семью, имя и возможность согласия.'},
+    {loc:'две пары близнецов',text:'Антифолы и Дромио внешне неразличимы, поэтому слова, поручения, деньги и упрёки постоянно попадают не к тому человеку. Двойники становятся главным механизмом ложных узнаваний.'},
+    {loc:'ускорение действия',text:'События разворачиваются в течение одного дня, и каждая ошибка немедленно вызывает следующую: ревность, спор о долге, закрытая дверь, обвинение в безумии. Накопление недоразумений создаёт стремительный темп.'},
+    {loc:'финальная сцена узнавания',text:'В монастыре раскрывается родство обеих пар близнецов, Эгеон встречает сыновей, а семья воссоединяется. Счастливая развязка восстанавливает личные связи и общественный порядок.'},
+    {loc:'эпизод с закрытой дверью',text:'Адриана принимает Антифола Сиракузского за мужа и приглашает его в дом, тогда как настоящий Антифол Эфесский не может попасть внутрь. Зритель знает правду, а персонажи уверены в ошибочной версии, поэтому возникает комический эффект.'}
   ]
 };
 
@@ -1543,3 +1557,128 @@ renderTicketAnswers=function(){
   $$('[data-toggle-answer]',host).forEach(b=>b.onclick=()=>{const card=$(`[data-answer-card="${b.dataset.toggleAnswer}"]`,host);card.classList.toggle('open');b.textContent=card.classList.contains('open')?'Свернуть':'Открыть ответ'});
   bindStatusButtons(host);
 };
+
+// ===== v15 FINAL: уникальные доказательства для билетов 3–100 =====
+// Этот блок намеренно находится в самом конце файла и имеет приоритет над ранними версиями renderTicketAnswers.
+const APP_ANSWERS_VERSION = 'v15-unique-evidence-all-tickets';
+
+function normalizeEvidenceTextV15(text){
+  return String(text||'').toLowerCase().replace(/ё/g,'е').replace(/[«»"'—–.,:;!?()]/g,' ').replace(/\s+/g,' ').trim();
+}
+
+function splitEvidenceSentencesV15(text,loc){
+  return String(text||'').split(/(?<=[.!?])\s+/).map(s=>s.trim()).filter(s=>s.length>=55).map(s=>({loc,text:s}));
+}
+
+function evidenceCandidatesV15(m){
+  const out=[];
+  // Главный источник — полный ответ, а не массив из одного-двух эпизодов.
+  const full=fullAnswerText(m);
+  full.forEach((p,pi)=>out.push(...splitEvidenceSentencesV15(p,`полный ответ: фрагмент ${pi+1}`)));
+  if(m.summary)out.push(...splitEvidenceSentencesV15(m.summary,'сводка по произведению'));
+  // Эпизоды добавляются только как дополнительный источник и проходят строгую дедупликацию.
+  (m.episodes||[]).forEach((e,i)=>out.push(...splitEvidenceSentencesV15(e,`эпизод ${i+1}`)));
+  const seen=new Set();
+  return out.filter(c=>{
+    const key=normalizeEvidenceTextV15(c.text);
+    if(!key||seen.has(key))return false;
+    seen.add(key);return true;
+  });
+}
+
+function pointTypeV15(point,index,total){
+  const p=String(point||'').toLowerCase();
+  if(/контекст|эпох|предпосыл|становлен|происхожд|этап/.test(p))return 'context';
+  if(/определ|понят|жанр|метод|направлен|характерист/.test(p))return 'definition';
+  if(/композ|сюжет|время|повеств|финал|темп|структур/.test(p))return 'composition';
+  if(/образ|геро|персонаж|систем/.test(p))return 'character';
+  if(/язык|стиль|прием|поэтик|символ|детал|гротеск|ирони|реч/.test(p))return 'poetics';
+  if(/эпизод|сцен|пример|текст/.test(p))return 'episode';
+  if(/сопостав|сравн|различ|национальн/.test(p))return 'comparison';
+  if(/вывод|значен|влияни|вклад|роль/.test(p)||index===total-1)return 'conclusion';
+  return 'analysis';
+}
+
+function typeKeywordsV15(type){
+  return {
+    context:['эпох','истор','обще','войн','революц','культур','возник','формир','век'],
+    definition:['жанр','направлен','метод','принцип','характер','определ','форма'],
+    composition:['композ','сюжет','финал','время','повеств','структур','действ','повтор','рамк'],
+    character:['геро','образ','персонаж','характер','поступ','конфликт','судьб'],
+    poetics:['стиль','язык','символ','ирони','гротеск','детал','ритм','метафор','прием','тон'],
+    episode:['эпизод','сцен','в момент','когда','финал','в начале','в романе','в пьесе','в рассказе'],
+    comparison:['в отличие','сопостав','однако','тогда как','различ','общ'],
+    conclusion:['таким образом','значение','влияние','итог','поэтому','показывает'],
+    analysis:['проблем','тема','идея','смысл','показывает','раскрывает']
+  }[type]||[];
+}
+
+function generatedEvidenceV15(m,point,index){
+  const type=pointTypeV15(point,index,m.plan.length);
+  const work=m.works?.[index % Math.max(1,m.works.length)]||m.works?.[0]||'основном произведении билета';
+  const author=questionAuthors(m.q.number)[0]?.name||'автора';
+  const thesis=sentencePoint(point,index).replace(/[.!?]+$/,'');
+  const templates={
+    context:{loc:'историко-литературный контекст',text:`Положение «${thesis}» подтверждается историей эпохи: общественные перемены формируют новые темы и жанры, поэтому произведение «${work}» необходимо рассматривать не изолированно, а как ответ ${author} на конкретную культурную ситуацию.`},
+    definition:{loc:'теоретическое доказательство',text:`Этот пункт подтверждается устройством текста: в «${work}» заявленное понятие проявляется не как отвлечённый термин, а через устойчивое сочетание конфликта, типа героя, жанровой формы и авторской позиции.`},
+    composition:{loc:'композиционная опора',text:`В «${work}» композиция организует смысл: последовательность сцен, повторы, смена точек зрения или характер развязки направляют читателя к выводу, сформулированному в пункте «${thesis}».`},
+    character:{loc:'система образов',text:`Доказательством служит поведение центрального персонажа «${work}»: его выбор и отношения с другими героями переводят общий тезис в конкретный нравственный и психологический конфликт.`},
+    poetics:{loc:'художественный приём',text:`В тексте «${work}» следует проследить один ведущий приём — деталь, символ, иронию, гротеск или особую речевую организацию; именно функция этого приёма доказывает положение «${thesis}».`},
+    episode:{loc:'конкретная сцена',text:`В качестве доказательства используется отдельная сцена из «${work}»: сначала кратко называется происходящее, затем объясняется, как поступок героя или художественная деталь этой сцены подтверждает тезис «${thesis}».`},
+    comparison:{loc:'сопоставительный аргумент',text:`Сопоставление показывает, что в «${work}» общий для эпохи принцип получает индивидуальную форму: необходимо назвать сходство с другой традицией и сразу обозначить различие в герое, конфликте или стиле.`},
+    conclusion:{loc:'итоговое доказательство',text:`Совокупность рассмотренных образов и приёмов позволяет сделать вывод: значение «${work}» состоит в том, что произведение не только выражает особенности своей эпохи, но и меняет последующее развитие соответствующего жанра или направления.`},
+    analysis:{loc:'аналитическая опора',text:`Пункт «${thesis}» доказывается причинной связью между проблематикой и формой «${work}»: автор не просто называет проблему, а воплощает её в конфликте, системе образов и художественных деталях.`}
+  };
+  return templates[type]||templates.analysis;
+}
+
+function uniqueEvidenceForMaterialsV15(m){
+  // Билеты 1 и 2 сохраняем как эталон; билет 9 также имеет вручную закреплённые опоры.
+  if(PLAN_EVIDENCE_V13[m.q.number])return PLAN_EVIDENCE_V13[m.q.number].slice(0,m.plan.length);
+  const candidates=evidenceCandidatesV15(m);
+  const used=new Set();
+  const result=[];
+  m.plan.forEach((point,index)=>{
+    const type=pointTypeV15(point,index,m.plan.length);
+    const keys=[...evidenceKeywordsV12(point),...typeKeywordsV15(type)];
+    let best=-1,bestScore=-Infinity;
+    candidates.forEach((c,ci)=>{
+      if(used.has(ci))return;
+      const low=normalizeEvidenceTextV15(c.text);
+      let score=0;
+      keys.forEach(k=>{if(low.includes(normalizeEvidenceTextV15(k)))score+=4;});
+      // Не позволяем одному общему эпизоду автоматически победить для всех пунктов.
+      if(c.loc.startsWith('эпизод')&&type!=='episode'&&type!=='character')score-=3;
+      if(type==='conclusion'&&/таким образом|следовательно|значение|итог/.test(low))score+=5;
+      if(type==='context'&&/эпох|истор|век|войн|революц/.test(low))score+=5;
+      if(type==='composition'&&/композ|финал|сюжет|повеств|время|структур/.test(low))score+=5;
+      if(type==='poetics'&&/символ|ирони|гротеск|стиль|язык|детал|ритм/.test(low))score+=5;
+      if(score>bestScore){bestScore=score;best=ci;}
+    });
+    let chosen;
+    // Берём фрагмент полного ответа только при содержательном совпадении; иначе создаём отдельную аналитическую опору.
+    if(best>=0&&bestScore>=4){chosen=candidates[best];used.add(best);}else chosen=generatedEvidenceV15(m,point,index);
+    let key=normalizeEvidenceTextV15(chosen.text);
+    // Абсолютная защита от повторов внутри билета.
+    if(result.some(r=>normalizeEvidenceTextV15(r.text)===key))chosen=generatedEvidenceV15(m,point,index);
+    key=normalizeEvidenceTextV15(chosen.text);
+    if(result.some(r=>normalizeEvidenceTextV15(r.text)===key))chosen={loc:`аналитическая опора ${index+1}`,text:`${generatedEvidenceV15(m,point,index).text} Отдельно подчеркните связь именно с пунктом № ${index+1}, чтобы доказательство не повторяло предыдущие аргументы.`};
+    result.push(chosen);
+  });
+  return result;
+}
+
+renderTicketAnswers=function(){
+  const host=$('#ticket-answers');if(!host)return;
+  const term=($('#answer-search')?.value||'').trim().toLowerCase(),fam=$('#answer-familiarity')?.value||'all',sec=$('#answer-section')?.value||'all';
+  const rows=EXAM_QUESTIONS.map(answerMaterials).filter(m=>{const hay=`${m.q.number} ${m.q.text} ${m.q.section} ${m.works.join(' ')} ${m.thesis}`.toLowerCase();return(!term||hay.includes(term))&&(fam==='all'||m.level===fam)&&(sec==='all'||m.q.section===sec)});
+  host.innerHTML=rows.map(m=>{
+    const paras=fullAnswerText(m),proofs=uniqueEvidenceForMaterialsV15(m);
+    const evidence=m.plan.map((p,i)=>{const e=proofs[i];return `<div class="argument-evidence"><div class="argument-title"><b>${i+1}. ${esc(sentencePoint(p,i))}</b></div><div class="argument-proof"><span class="evidence-label">${esc(e.loc)}</span><p>${esc(e.text)}</p></div></div>`}).join('');
+    return `<article class="ticket-answer-card card" data-answer-card="${m.q.number}"><div class="ticket-answer-head"><div class="ticket-answer-number">${m.q.number}</div><div class="ticket-answer-title"><h3>${esc(m.q.text)}</h3><p>${esc(m.q.section)}</p></div><div><span class="familiarity-badge familiarity-${m.level}">${familiarityLabel(m.level)}</span><button class="answer-toggle" data-toggle-answer="${m.q.number}">Открыть ответ</button></div></div><div class="ticket-answer-body">${m.correction?`<div class="correction-note"><b>Важное уточнение.</b> ${esc(m.correction)}</div>`:''}<div class="answer-block"><h4>Полный ответ</h4><div class="full-answer-text">${paras.map(p=>`<p>${esc(p)}</p>`).join('')}</div></div><div class="answer-block"><h4>Тезисный план и доказательства</h4>${evidence}</div><div class="answer-block"><h4>Произведения для аргументации</h4>${m.works.length?m.works.map(w=>`<span class="work-chip">${esc(w)}</span>`).join(''):'<p>Для обзорного вопроса используйте несколько авторов эпохи.</p>'}${m.summary?`<p class="ready-answer" style="margin-top:12px"><b>Сводка по произведению.</b> ${esc(m.summary)}</p>`:''}</div><div class="tiny-note" style="margin-top:10px">Версия ответов: ${APP_ANSWERS_VERSION}</div></div></article>`;
+  }).join('')||'<article class="card" style="padding:18px">Материалы не найдены.</article>';
+  $$('[data-toggle-answer]',host).forEach(b=>b.onclick=()=>{const card=$(`[data-answer-card="${b.dataset.toggleAnswer}"]`,host);card.classList.toggle('open');b.textContent=card.classList.contains('open')?'Свернуть':'Открыть ответ'});
+  bindStatusButtons(host);
+};
+
+console.info('Literature Atlas answers loaded:',APP_ANSWERS_VERSION);
