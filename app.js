@@ -1416,4 +1416,48 @@ Object.entries(MANUAL_FULL_ANSWERS_4_30).forEach(([number, paragraphs]) => {
   ANSWER_OVERRIDES[n].fullAnswer = paragraphs;
 });
 
-// GitHub build prepared 2026-07-14
+// ===== v12: уникальные доказательства для каждого пункта тезисного плана =====
+function evidenceKeywordsV12(text){
+  const stop=new Set(['следует','нужно','важно','назвать','показать','объяснить','раскрыть','разобрать','сопоставить','указать','сделать','вывод','роль','тема','образ','произведение','творчество','основные','особенности']);
+  return String(text||'').toLowerCase().replace(/ё/g,'е').split(/[^а-яa-z0-9]+/).filter(w=>w.length>=5&&!stop.has(w));
+}
+function uniqueEvidenceForMaterialsV12(m){
+  const count=m.plan.length;
+  const episodes=episodePoolForMaterials(m).map(e=>({loc:e.loc||'эпизод для аргумента',text:e.text}));
+  const paragraphs=(Array.isArray(m.fullAnswer)?m.fullAnswer:[])
+    .map((text,i)=>({loc:`фрагмент полного ответа ${i+1}`,text:String(text).trim()}))
+    .filter(x=>x.text.length>45);
+  const candidates=[...episodes,...paragraphs];
+  const used=new Set();
+  return m.plan.map((point,index)=>{
+    const keys=evidenceKeywordsV12(point);
+    let best=null,bestScore=-1;
+    candidates.forEach((c,ci)=>{
+      if(used.has(ci))return;
+      const low=c.text.toLowerCase().replace(/ё/g,'е');
+      let score=keys.reduce((s,k)=>s+(low.includes(k)?3:0),0);
+      if(ci<episodes.length)score+=1;
+      score-=Math.abs((ci/candidates.length)-(index/count))*0.3;
+      if(score>bestScore){best={...c,ci};bestScore=score;}
+    });
+    if(!best){
+      const work=m.works?.[index%m.works.length]||m.works?.[0]||'основное произведение билета';
+      return {loc:'аналитическая опора',text:`Для доказательства этого пункта обратитесь к произведению «${work}»: назовите конкретный образ, сцену или композиционный приём и объясните, как именно он подтверждает тезис «${sentencePoint(point,index)}»`};
+    }
+    used.add(best.ci);
+    return {loc:best.loc,text:best.text};
+  });
+}
+
+renderTicketAnswers=function(){
+  const host=$('#ticket-answers');if(!host)return;
+  const term=($('#answer-search')?.value||'').trim().toLowerCase(),fam=$('#answer-familiarity')?.value||'all',sec=$('#answer-section')?.value||'all';
+  const rows=EXAM_QUESTIONS.map(answerMaterials).filter(m=>{const hay=`${m.q.number} ${m.q.text} ${m.q.section} ${m.works.join(' ')} ${m.thesis}`.toLowerCase();return(!term||hay.includes(term))&&(fam==='all'||m.level===fam)&&(sec==='all'||m.q.section===sec)});
+  host.innerHTML=rows.map(m=>{
+    const paras=fullAnswerText(m);
+    const proofs=uniqueEvidenceForMaterialsV12(m);
+    const evidence=m.plan.map((p,i)=>{const e=proofs[i];return `<div class="argument-evidence"><div class="argument-title"><b>${i+1}. ${esc(sentencePoint(p,i))}</b></div><div class="argument-proof"><span class="evidence-label">${esc(e.loc)}</span><p>${esc(e.text)}</p></div></div>`}).join('');
+    return `<article class="ticket-answer-card card" data-answer-card="${m.q.number}"><div class="ticket-answer-head"><div class="ticket-answer-number">${m.q.number}</div><div class="ticket-answer-title"><h3>${esc(m.q.text)}</h3><p>${esc(m.q.section)}</p></div><div><span class="familiarity-badge familiarity-${m.level}">${familiarityLabel(m.level)}</span><button class="answer-toggle" data-toggle-answer="${m.q.number}">Открыть ответ</button></div></div><div class="ticket-answer-body">${m.correction?`<div class="correction-note"><b>Важное уточнение.</b> ${esc(m.correction)}</div>`:''}<div class="answer-block"><h4>Полный ответ</h4><div class="full-answer-text">${paras.map(p=>`<p>${esc(p)}</p>`).join('')}</div></div><div class="answer-block"><h4>Тезисный план и доказательства</h4>${evidence}</div><div class="answer-block"><h4>Произведения для аргументации</h4>${m.works.length?m.works.map(w=>`<span class="work-chip">${esc(w)}</span>`).join(''):'<p>Для обзорного вопроса используйте несколько авторов эпохи.</p>'}${m.summary?`<p class="ready-answer" style="margin-top:12px"><b>Сводка по произведению.</b> ${esc(m.summary)}</p>`:''}</div></div></article>`;
+  }).join('')||'<article class="card" style="padding:18px">Материалы не найдены.</article>';
+  $$('[data-toggle-answer]',host).forEach(b=>b.onclick=()=>{const card=$(`[data-answer-card="${b.dataset.toggleAnswer}"]`,host);card.classList.toggle('open');b.textContent=card.classList.contains('open')?'Свернуть':'Открыть ответ'});
+};
