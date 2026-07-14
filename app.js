@@ -1415,3 +1415,5 @@ Object.entries(MANUAL_FULL_ANSWERS_4_30).forEach(([number, paragraphs]) => {
   ANSWER_OVERRIDES[n] ??= {};
   ANSWER_OVERRIDES[n].fullAnswer = paragraphs;
 });
+
+// GitHub build prepared 2026-07-14
