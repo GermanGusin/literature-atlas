@@ -1461,3 +1461,85 @@ renderTicketAnswers=function(){
   }).join('')||'<article class="card" style="padding:18px">Материалы не найдены.</article>';
   $$('[data-toggle-answer]',host).forEach(b=>b.onclick=()=>{const card=$(`[data-answer-card="${b.dataset.toggleAnswer}"]`,host);card.classList.toggle('open');b.textContent=card.classList.contains('open')?'Свернуть':'Открыть ответ'});
 };
+
+// ===== v13: доказательства по образцу билетов 1 и 2 — без повторов =====
+const PLAN_EVIDENCE_V13 = {
+  1: [
+    {loc:'общая характеристика',text:'Ранний эпос существовал прежде всего в устной форме: его исполняли певцы-сказители, поэтому текст опирается на повторы, устойчивые формулы и коллективную память о войнах, переселениях и родовых конфликтах.'},
+    {loc:'«Похищение быка из Куальнге»',text:'Кухулин один защищает Улад, а его бой с Фердиадом соединяет подвиг с личной трагедией: воинский долг заставляет героя выступить против близкого друга.'},
+    {loc:'«Песнь о Хильдебранде» и «Беовульф»',text:'Хильдебранд вступает в бой с неузнанным сыном, потому что закон чести оказывается сильнее родства; Беовульф в старости сражается с драконом ради народа, хотя понимает, что победа будет оплачена его жизнью.'},
+    {loc:'«Старшая Эдда»',text:'Сигурд побеждает Фафнира и получает проклятый клад, но не может избежать предательства. Эддическая традиция утверждает достоинство героя, который знает о неизбежности судьбы и всё равно действует.'},
+    {loc:'сопоставительный вывод',text:'Кельтский эпос подчёркивает магию и гейсы, германский — дружинную верность и честь, древнескандинавский — фатализм. Все три традиции ставят служение роду и народу выше личного благополучия.'}
+  ],
+  2: [
+    {loc:'жанровая характеристика',text:'Зрелый героический эпос связан с эпохой феодальных государств: родовой герой превращается в вассала, а защита племени — в служение королю, вере и христианскому миру.'},
+    {loc:'смерть Роланда',text:'Перед смертью Роланд обращается к Богу и поднимает перчатку к небу. Воинская гибель получает смысл христианского мученичества и верного служения.'},
+    {loc:'эпизод с Олифантом',text:'Роланд долго отказывается трубить в рог, потому что считает просьбу о помощи бесчестием. Его мужество переходит в гордыню, а слишком поздний сигнал приводит к гибели арьергарда.'},
+    {loc:'спор Роланда и Оливье',text:'Оливье воплощает разумную доблесть и предлагает вовремя позвать Карла; Роланд защищает абсолютный героизм. Их спор показывает, что подлинное мужество нуждается в ответственности за товарищей.'},
+    {loc:'поэтика поэмы',text:'Гиперболы увеличивают силу героев и масштаб битвы, повторы замедляют кульминационные сцены, а параллельные эпизоды придают повествованию торжественный, почти ритуальный характер.'}
+  ]
+};
+
+function evidenceSentencePoolV13(m){
+  const raw=[];
+  episodePoolForMaterials(m).forEach(e=>raw.push({loc:e.loc||'эпизод для аргумента',text:String(e.text||'').trim()}));
+  const explicit=Array.isArray(m.fullAnswer)?m.fullAnswer:[];
+  explicit.forEach((p,pi)=>{
+    String(p||'').split(/(?<=[.!?])\s+/).forEach((s,si)=>{
+      const text=s.trim();
+      if(text.length>55)raw.push({loc:`фрагмент ответа ${pi+1}`,text});
+    });
+  });
+  if(m.summary)String(m.summary).split(/(?<=[.!?])\s+/).forEach(s=>{if(s.trim().length>55)raw.push({loc:'сводка по произведению',text:s.trim()})});
+  const seen=new Set();
+  return raw.filter(x=>{
+    const key=x.text.toLowerCase().replace(/\s+/g,' ').trim();
+    if(!key||seen.has(key))return false;
+    seen.add(key);return true;
+  });
+}
+
+function fallbackEvidenceV13(m,point,index){
+  const work=m.works?.[index%m.works.length]||m.works?.[0]||'основное произведение';
+  const patterns=[
+    {loc:'историко-литературная опора',text:`Этот пункт доказывается через контекст эпохи: нужно связать «${work}» с общественными и эстетическими причинами появления рассматриваемого явления.`},
+    {loc:'поэтика произведения',text:`В произведении «${work}» следует назвать конкретный композиционный или речевой приём и показать, какую функцию он выполняет, а не ограничиваться его перечислением.`},
+    {loc:'система образов',text:`В качестве доказательства раскройте поступок или внутренний конфликт центрального героя «${work}» и свяжите его с формулировкой данного пункта.`},
+    {loc:'конкретный эпизод',text:`Выберите отдельную сцену из «${work}», кратко обозначьте происходящее и объясните, как художественная деталь этой сцены подтверждает тезис.`},
+    {loc:'итоговое сопоставление',text:`В завершение сопоставьте приведённые примеры и сформулируйте, чем именно рассматриваемое явление отличается от соседнего направления, жанра или авторской модели.`}
+  ];
+  return patterns[index%patterns.length];
+}
+
+function uniqueEvidenceForMaterialsV13(m){
+  if(PLAN_EVIDENCE_V13[m.q.number])return PLAN_EVIDENCE_V13[m.q.number].slice(0,m.plan.length);
+  const candidates=evidenceSentencePoolV13(m);
+  const used=new Set();
+  return m.plan.map((point,index)=>{
+    const keys=evidenceKeywordsV12(point);
+    let bestIndex=-1,bestScore=-Infinity;
+    candidates.forEach((c,ci)=>{
+      if(used.has(ci))return;
+      const low=c.text.toLowerCase().replace(/ё/g,'е');
+      let score=keys.reduce((sum,k)=>sum+(low.includes(k)?5:0),0);
+      if(c.loc.includes('эпизод')||c.loc.includes('сцена'))score+=1;
+      if(score>bestScore){bestScore=score;bestIndex=ci;}
+    });
+    if(bestIndex<0)return fallbackEvidenceV13(m,point,index);
+    used.add(bestIndex);
+    return candidates[bestIndex];
+  });
+}
+
+renderTicketAnswers=function(){
+  const host=$('#ticket-answers');if(!host)return;
+  const term=($('#answer-search')?.value||'').trim().toLowerCase(),fam=$('#answer-familiarity')?.value||'all',sec=$('#answer-section')?.value||'all';
+  const rows=EXAM_QUESTIONS.map(answerMaterials).filter(m=>{const hay=`${m.q.number} ${m.q.text} ${m.q.section} ${m.works.join(' ')} ${m.thesis}`.toLowerCase();return(!term||hay.includes(term))&&(fam==='all'||m.level===fam)&&(sec==='all'||m.q.section===sec)});
+  host.innerHTML=rows.map(m=>{
+    const paras=fullAnswerText(m),proofs=uniqueEvidenceForMaterialsV13(m);
+    const evidence=m.plan.map((p,i)=>{const e=proofs[i]||fallbackEvidenceV13(m,p,i);return `<div class="argument-evidence"><div class="argument-title"><b>${i+1}. ${esc(sentencePoint(p,i))}</b></div><div class="argument-proof"><span class="evidence-label">${esc(e.loc)}</span><p>${esc(e.text)}</p></div></div>`}).join('');
+    return `<article class="ticket-answer-card card" data-answer-card="${m.q.number}"><div class="ticket-answer-head"><div class="ticket-answer-number">${m.q.number}</div><div class="ticket-answer-title"><h3>${esc(m.q.text)}</h3><p>${esc(m.q.section)}</p></div><div><span class="familiarity-badge familiarity-${m.level}">${familiarityLabel(m.level)}</span><button class="answer-toggle" data-toggle-answer="${m.q.number}">Открыть ответ</button></div></div><div class="ticket-answer-body">${m.correction?`<div class="correction-note"><b>Важное уточнение.</b> ${esc(m.correction)}</div>`:''}<div class="answer-block"><h4>Полный ответ</h4><div class="full-answer-text">${paras.map(p=>`<p>${esc(p)}</p>`).join('')}</div></div><div class="answer-block"><h4>Тезисный план и доказательства</h4>${evidence}</div><div class="answer-block"><h4>Произведения для аргументации</h4>${m.works.length?m.works.map(w=>`<span class="work-chip">${esc(w)}</span>`).join(''):'<p>Для обзорного вопроса используйте несколько авторов эпохи.</p>'}${m.summary?`<p class="ready-answer" style="margin-top:12px"><b>Сводка по произведению.</b> ${esc(m.summary)}</p>`:''}</div></div></article>`;
+  }).join('')||'<article class="card" style="padding:18px">Материалы не найдены.</article>';
+  $$('[data-toggle-answer]',host).forEach(b=>b.onclick=()=>{const card=$(`[data-answer-card="${b.dataset.toggleAnswer}"]`,host);card.classList.toggle('open');b.textContent=card.classList.contains('open')?'Свернуть':'Открыть ответ'});
+  bindStatusButtons(host);
+};
